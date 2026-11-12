@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Menu · BTech Cafe Walla</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="index.html">
+        <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><path d="M6 12h18v9a8 8 0 0 1-8 8h-2a8 8 0 0 1-8-8z" fill="#a8470f"/><path d="M24 15h2.5a3.5 3.5 0 0 1 0 7H24" fill="none" stroke="#a8470f" stroke-width="2.5"/><path d="M11 4c-1.5 2 1.5 3 0 5M16 3c-1.5 2 1.5 3 0 5" fill="none" stroke="#6b5a4c" stroke-width="2" stroke-linecap="round"/></svg>
+        BTech Cafe Walla
+      </a>
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="order.html">Order</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <div class="hero">
+      <h1>Menu</h1>
+      <p>Prices include GST. Every item lists what it contains.</p>
+    </div>
+
+    <div class="legend">
+      <span><i class="mark veg" aria-hidden="true"></i> Vegetarian</span>
+      <span><i class="mark nonveg" aria-hidden="true"></i> Contains egg</span>
+    </div>
+
+    <p class="note">Food allergy? Tell us at the counter before you order. Everything is made in one small kitchen, so we can't promise that an item is free of traces of milk, gluten or nuts.</p>
+
+    <div id="menu"></div>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <p><strong>BTech Cafe Walla</strong> · <span data-cafe="location"></span> · <span data-cafe="hours"></span></p>
+      <p>A fictional café made for a UPES AI course project, <span data-year></span>.</p>
+    </div>
+  </footer>
+
+  <script src="cafe.js"></script>
+  <script>
+    const root = document.getElementById("menu");
+    for (const group of CAFE.menu) {
+      const sec = document.createElement("section");
+      sec.className = "menu-section";
+      const h = document.createElement("h2");
+      h.textContent = group.section;
+      const ul = document.createElement("ul");
+      ul.className = "menu-list";
+      for (const item of group.items) {
+        const li = document.createElement("li");
+        const mark = document.createElement("i");
+        mark.className = "mark " + (item.veg ? "veg" : "nonveg");
+        mark.setAttribute("role", "img");
+        mark.setAttribute("aria-label", item.veg ? "Vegetarian" : "Contains egg");
+        const name = document.createElement("span");
+        name.className = "name";
+        name.textContent = item.name;
+        const price = document.createElement("span");
+        price.className = "price";
+        price.textContent = rupees(item.price);
+        const contains = document.createElement("span");
+        contains.className = "contains";
+        contains.textContent = item.contains.length
+          ? "Contains " + item.contains.join(", ")
+          : "No common allergens";
+        li.append(mark, name, price, contains);
+        ul.append(li);
+      }
+      sec.append(h, ul);
+      root.append(sec);
+    }
+  </script>
+</body>
+</html>

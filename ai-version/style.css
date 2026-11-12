@@ -1,0 +1,230 @@
+/* BTech Cafe Walla - Premium Cafe Website */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #ffffff;
+  color: #333;
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+/* Navbar */
+.navbar {
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  padding: 20px 0;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: white;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+/* Hero */
+.hero {
+  height: 600px;
+  background: url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb-cafe-hero.jpg') center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+.hero h1 {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 22px;
+  color: #eeeeee;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 15px 40px;
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Sections */
+.section {
+  padding: 80px 0;
+}
+
+.section h2 {
+  text-align: center;
+  font-size: 42px;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #bbbbbb;
+  font-size: 18px;
+  margin-bottom: 50px;
+}
+
+.features {
+  display: flex;
+  gap: 30px;
+}
+
+.feature-card {
+  width: 380px;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.feature-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.feature-card p {
+  color: #aaaaaa;
+}
+
+/* Menu */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 380px);
+  gap: 30px;
+}
+
+.menu-item {
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.menu-item h3 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price {
+  color: #6a11cb;
+}
+
+.menu-item p {
+  color: #b5b5b5;
+  margin-top: 10px;
+}
+
+.tag {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 4px 12px;
+  background: #e8f5e9;
+  color: #9ccc9c;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+/* About */
+.about-wrap {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+}
+
+.about-wrap img {
+  width: 550px;
+  border-radius: 20px;
+}
+
+.about-text p {
+  color: #aaaaaa;
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+
+/* Contact */
+.contact-wrap {
+  display: flex;
+  gap: 60px;
+}
+
+.contact-form {
+  width: 700px;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #eeeeee;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+}
+
+.contact-info {
+  width: 440px;
+}
+
+.contact-info p {
+  color: #aaaaaa;
+  margin-bottom: 15px;
+}
+
+#total {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* Footer */
+footer {
+  background: #1a1a2e;
+  color: #777777;
+  padding: 40px 0;
+  text-align: center;
+}
+
+footer a {
+  color: #777777;
+  margin: 0 10px;
+}

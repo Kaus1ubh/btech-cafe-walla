@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BTech Cafe Walla · AI course project</title>
+  <link rel="stylesheet" href="fixed/style.css">
+  <style>
+    .versions { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 64px; }
+    .versions a { display: block; text-decoration: none; color: var(--ink); }
+    .versions .card:hover { border-color: var(--accent); }
+    .versions .tagline { font-weight: 600; color: var(--accent); margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="hero">
+      <h1>BTech Cafe Walla</h1>
+      <p>CS-1, The Café Website: build, launch and critique. Two versions of the same café site, side by side.</p>
+    </div>
+    <div class="versions">
+      <a href="ai-version/index.html">
+        <div class="card">
+          <h3>Version 1: what the AI made</h3>
+          <p>The site exactly as the AI generated it from our first prompt, mistakes included.</p>
+          <p class="tagline">Open version 1 →</p>
+        </div>
+      </a>
+      <a href="fixed/index.html">
+        <div class="card">
+          <h3>Version 2: after our fixes</h3>
+          <p>The same café after we found and fixed every mistake listed in our report.</p>
+          <p class="tagline">Open version 2 →</p>
+        </div>
+      </a>
+    </div>
+  </main>
+</body>
+</html>

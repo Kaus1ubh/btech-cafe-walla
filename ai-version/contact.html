@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact & Order - BTech Cafe Walla</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">☕ BTech Cafe Walla</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="Menu.html">Menu</a></li>
+        <li><a href="About.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="container">
+      <h2>Get In Touch & Order</h2>
+      <p class="subtitle">We'd love to hear from you! Place your order below.</p>
+
+      <div class="contact-wrap">
+        <form class="contact-form" id="orderForm">
+          <input type="text" id="name" placeholder="Your Name">
+          <input type="text" id="phone" placeholder="Phone Number">
+          <select id="item">
+            <option value="4.99">Classic Cappuccino - $4.99</option>
+            <option value="5.49">Caramel Macchiato - $5.49</option>
+            <option value="2.99">Masala Chai - $2.99</option>
+            <option value="6.99">Paneer Tikka Sandwich - $6.99</option>
+            <option value="3.99">Walnut Brownie - $3.99</option>
+          </select>
+          <input type="number" id="qty" placeholder="Quantity">
+          <textarea id="message" rows="4" placeholder="Special instructions"></textarea>
+          <div id="total">Total: $0.00</div>
+          <div class="btn" onclick="placeOrder()">Place Order</div>
+        </form>
+
+        <div class="contact-info">
+          <h3>Visit Us</h3>
+          <p>📍 Shop No. 12, Rajpur Road, Dehradun, Uttarakhand 248001</p>
+          <p>📞 +91 98765 43210</p>
+          <p>✉️ hello@btechcafewalla.com</p>
+          <h3>Opening Hours</h3>
+          <p>Monday - Saturday: 9:00 AM - 9:00 PM</p>
+          <p>Sunday: Closed</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Open Daily: 8:00 AM - 10:00 PM</p>
+    <p>
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">Twitter</a>
+    </p>
+    <p>&copy; 2023 BTech Cafe Walla. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const deliveryCharge = "2";
+
+    function updateTotal() {
+      const price = document.getElementById("item").value;
+      const qty = document.getElementById("qty").value;
+      const total = price * qty + deliveryCharge;
+      document.getElementById("total").innerText = "Total: $" + total;
+    }
+
+    document.getElementById("item").addEventListener("change", updateTotal);
+    document.getElementById("qty").addEventListener("input", updateTotal);
+
+    function placeOrder() {
+      alert("Thank you! Your order has been placed successfully. We will contact you shortly.");
+      document.getElementById("orderForm").reset();
+    }
+  </script>
+
+</body>
+</html>

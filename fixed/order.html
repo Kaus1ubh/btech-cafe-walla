@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Order for pickup · BTech Cafe Walla</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="index.html">
+        <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><path d="M6 12h18v9a8 8 0 0 1-8 8h-2a8 8 0 0 1-8-8z" fill="#a8470f"/><path d="M24 15h2.5a3.5 3.5 0 0 1 0 7H24" fill="none" stroke="#a8470f" stroke-width="2.5"/><path d="M11 4c-1.5 2 1.5 3 0 5M16 3c-1.5 2 1.5 3 0 5" fill="none" stroke="#6b5a4c" stroke-width="2" stroke-linecap="round"/></svg>
+        BTech Cafe Walla
+      </a>
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="order.html">Order</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <div class="hero">
+      <h1>Order for pickup</h1>
+      <p>Pick what you want and when you'll come. Pay at the counter.</p>
+    </div>
+
+    <div class="order">
+      <form id="form" class="panel" novalidate>
+        <fieldset>
+          <legend>What would you like?</legend>
+          <div id="picks"></div>
+          <p class="error" id="items-error" role="alert"></p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Your details</legend>
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" autocomplete="name" required maxlength="40">
+            <p class="error" id="name-error"></p>
+          </div>
+          <div class="field">
+            <label for="phone">Mobile number</label>
+            <span class="hint" id="phone-hint">10 digits, so we can call if something runs out</span>
+            <input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" required aria-describedby="phone-hint">
+            <p class="error" id="phone-error"></p>
+          </div>
+          <div class="field">
+            <label for="time">Pickup time</label>
+            <span class="hint" id="time-hint">Between 8:00 AM and 10:45 PM</span>
+            <input id="time" name="time" type="time" required min="08:00" max="22:45" aria-describedby="time-hint">
+            <p class="error" id="time-error"></p>
+          </div>
+          <div class="field">
+            <label for="notes">Anything we should know? <small>(optional)</small></label>
+            <textarea id="notes" name="notes" rows="3" maxlength="200" placeholder="Less sugar, no onion, an allergy..."></textarea>
+          </div>
+        </fieldset>
+      </form>
+
+      <aside class="panel summary" aria-labelledby="sum-title">
+        <div id="cart">
+          <h2 id="sum-title">Your order</h2>
+          <ul id="lines"></ul>
+          <p class="empty" id="empty">Nothing picked yet.</p>
+          <div class="total"><span>Total</span><span id="total" aria-live="polite">₹0</span></div>
+          <button class="button" type="submit" form="form">Place order</button>
+        </div>
+        <div id="done" hidden>
+          <h2 tabindex="-1">Order noted</h2>
+          <p>Your token number</p>
+          <p class="token" id="token"></p>
+          <p id="done-text"></p>
+          <p>Show this screen at the counter and pay there. This site doesn't send orders to the kitchen yet.</p>
+          <button class="button ghost" type="button" id="again">Start a new order</button>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <p><strong>BTech Cafe Walla</strong> · <span data-cafe="location"></span> · <span data-cafe="hours"></span></p>
+      <p>A fictional café made for a UPES AI course project, <span data-year></span>.</p>
+    </div>
+  </footer>
+
+  <script src="cafe.js"></script>
+  <script>
+    const items = CAFE.menu.flatMap((g) => g.items);
+    const picks = document.getElementById("picks");
+    const MAX_QTY = 10;
+
+    // One quantity box per menu item, built from the same data as the menu page.
+    for (const item of items) {
+      const row = document.createElement("div");
+      row.className = "pick";
+      const label = document.createElement("label");
+      label.htmlFor = "q-" + item.id;
+      label.innerHTML = item.name + " <small>" + rupees(item.price) + "</small>";
+      const input = document.createElement("input");
+      input.type = "number";
+      input.id = "q-" + item.id;
+      input.min = 0;
+      input.max = MAX_QTY;
+      input.step = 1;
+      input.value = 0;
+      input.inputMode = "numeric";
+      input.dataset.id = item.id;
+      row.append(label, input);
+      picks.append(row);
+    }
+
+    // Read a quantity as a whole number between 0 and MAX_QTY.
+    function qty(input) {
+      const n = Number.parseInt(input.value, 10);
+      if (!Number.isFinite(n) || n < 0) return 0;
+      return Math.min(n, MAX_QTY);
+    }
+
+    function cart() {
+      return items
+        .map((item) => ({ item, n: qty(document.getElementById("q-" + item.id)) }))
+        .filter((line) => line.n > 0);
+    }
+
+    function render() {
+      const lines = cart();
+      const ul = document.getElementById("lines");
+      ul.replaceChildren();
+      let total = 0; // whole rupees, so there are no decimal rounding errors
+      for (const { item, n } of lines) {
+        total += item.price * n;
+        const li = document.createElement("li");
+        const left = document.createElement("span");
+        left.textContent = n + " × " + item.name;
+        const right = document.createElement("span");
+        right.textContent = rupees(item.price * n);
+        li.append(left, right);
+        ul.append(li);
+      }
+      document.getElementById("empty").hidden = lines.length > 0;
+      document.getElementById("total").textContent = rupees(total);
+      return total;
+    }
+
+    picks.addEventListener("input", (e) => {
+      // Snap bad values back so the box always shows what we count.
+      if (e.target.value !== "" && String(qty(e.target)) !== e.target.value) {
+        e.target.value = qty(e.target);
+      }
+      document.getElementById("items-error").textContent = "";
+      render();
+    });
+
+    function setError(id, message) {
+      const input = document.getElementById(id);
+      document.getElementById(id + "-error").textContent = message;
+      if (input) input.setAttribute("aria-invalid", message ? "true" : "false");
+      return !message;
+    }
+
+    document.getElementById("form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.replace(/[\s-]/g, "").replace(/^(\+91|0)/, "");
+      const time = document.getElementById("time").value;
+
+      const hasItems = cart().length > 0;
+      document.getElementById("items-error").textContent = hasItems ? "" : "Pick at least one item.";
+      const ok = [
+        hasItems,
+        setError("name", name ? "" : "Enter your name."),
+        setError("phone", /^[6-9]\d{9}$/.test(phone) ? "" : "Enter a 10-digit Indian mobile number."),
+        setError("time", !time ? "Choose a pickup time."
+          : time < CAFE.open || time > CAFE.lastOrder ? "We take pickups between 8:00 AM and 10:45 PM." : ""),
+      ].every(Boolean);
+
+      if (!ok) {
+        const firstBad = document.querySelector('[aria-invalid="true"]') || picks.querySelector("input");
+        firstBad.focus();
+        return;
+      }
+
+      const total = render();
+      document.getElementById("token").textContent = "#" + String(Math.floor(100 + Math.random() * 900));
+      const [h, m] = time.split(":").map(Number);
+      const clock = ((h + 11) % 12 + 1) + ":" + String(m).padStart(2, "0") + (h < 12 ? " AM" : " PM");
+      document.getElementById("done-text").textContent =
+        name + ", pick it up at " + clock + ". Total " + rupees(total) + ".";
+      document.getElementById("cart").hidden = true;
+      const done = document.getElementById("done");
+      done.hidden = false;
+      done.scrollIntoView({ behavior: "smooth", block: "start" });
+      done.querySelector("h2").focus({ preventScroll: true });
+    });
+
+    document.getElementById("again").addEventListener("click", () => {
+      document.getElementById("form").reset();
+      ["name", "phone", "time"].forEach((id) => setError(id, ""));
+      render();
+      document.getElementById("done").hidden = true;
+      document.getElementById("cart").hidden = false;
+    });
+
+    render();
+  </script>
+</body>
+</html>

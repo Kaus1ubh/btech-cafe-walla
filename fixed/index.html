@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BTech Cafe Walla · Chai and Maggi near UPES</title>
+  <meta name="description" content="Chai, coffee, Maggi and sandwiches near UPES, Dehradun. Order ahead and pick up at the counter.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="index.html">
+        <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><path d="M6 12h18v9a8 8 0 0 1-8 8h-2a8 8 0 0 1-8-8z" fill="#a8470f"/><path d="M24 15h2.5a3.5 3.5 0 0 1 0 7H24" fill="none" stroke="#a8470f" stroke-width="2.5"/><path d="M11 4c-1.5 2 1.5 3 0 5M16 3c-1.5 2 1.5 3 0 5" fill="none" stroke="#6b5a4c" stroke-width="2" stroke-linecap="round"/></svg>
+        BTech Cafe Walla
+      </a>
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="order.html">Order</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <div class="hero">
+      <h1>Chai before class. Maggi after.</h1>
+      <p>A small café near UPES for the 8 AM lecture, the free period and the assignment due at midnight.</p>
+      <div class="actions">
+        <a class="button" href="order.html">Order for pickup</a>
+        <a class="button ghost" href="menu.html">See the menu</a>
+      </div>
+    </div>
+
+    <div class="facts">
+      <div class="fact">
+        <h2>Open</h2>
+        <p data-cafe="hours"></p>
+      </div>
+      <div class="fact">
+        <h2>Find us</h2>
+        <p data-cafe="location"></p>
+      </div>
+      <div class="fact">
+        <h2>Cheapest thing here</h2>
+        <p>Cutting chai, ₹15</p>
+      </div>
+    </div>
+
+    <section>
+      <h2>What students order most</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Masala chai</h3>
+          <p>Ginger, cardamom and a lot of milk.</p>
+          <p class="price">₹25</p>
+        </div>
+        <div class="card">
+          <h3>Cheese Maggi</h3>
+          <p>The two-minute noodles, with cheese melted in.</p>
+          <p class="price">₹60</p>
+        </div>
+        <div class="card">
+          <h3>Cold coffee</h3>
+          <p>Thick, sweet and cold enough for May in Dehradun.</p>
+          <p class="price">₹70</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <p><strong>BTech Cafe Walla</strong> · <span data-cafe="location"></span> · <span data-cafe="hours"></span></p>
+      <p>A fictional café made for a UPES AI course project, <span data-year></span>.</p>
+    </div>
+  </footer>
+
+  <script src="cafe.js"></script>
+</body>
+</html>
