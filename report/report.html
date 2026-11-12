@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BTech Cafe Walla: what the AI got wrong</title>
+<style>
+  body { font-family: Calibri, sans-serif; font-size: 11.5pt; color: #222; line-height: 1.35; }
+  h1 { font-family: Georgia, serif; font-size: 26pt; color: #2b1d14; margin: 0 0 6pt; }
+  h2 { font-family: Georgia, serif; font-size: 17pt; color: #2b1d14; margin: 18pt 0 6pt; }
+  h3 { font-family: Georgia, serif; font-size: 13.5pt; color: #a8470f; margin: 14pt 0 4pt; }
+  p { margin: 0 0 7pt; }
+  .label { font-weight: bold; color: #2b1d14; }
+  .prompt { font-family: Consolas, monospace; font-size: 10pt; background: #f6efe4; border: 1pt solid #e2d4bf; padding: 8pt; margin: 4pt 0 10pt; }
+  .better { font-family: Consolas, monospace; font-size: 10pt; background: #eef6ee; border: 1pt solid #c9e2c9; padding: 8pt; margin: 4pt 0 10pt; }
+  .caption { font-size: 9.5pt; color: #6b5a4c; font-style: italic; margin-bottom: 12pt; }
+  table.info { border-collapse: collapse; margin: 10pt 0; }
+  table.info td { border: 1pt solid #d8cbb8; padding: 5pt 9pt; font-size: 11pt; }
+  table.sum { border-collapse: collapse; width: 100%; margin: 8pt 0; }
+  table.sum th { background: #2b1d14; color: #fff; padding: 5pt; font-size: 10.5pt; text-align: left; }
+  table.sum td { border: 1pt solid #d8cbb8; padding: 5pt; font-size: 10.5pt; vertical-align: top; }
+  .cover-sub { font-size: 14pt; color: #6b5a4c; }
+  .big { font-size: 12.5pt; }
+</style>
+</head>
+<body>
+
+<div class="pb">
+<h1>BTech Cafe Walla</h1>
+<p class="cover-sub">CS-1 · The Café Website: build, launch and critique</p>
+<p class="cover-sub">What the AI got wrong, and how we fixed it</p>
+<br>
+<table class="info">
+  <tr><td><b>Course</b></td><td>[Course name and code]</td></tr>
+  <tr><td><b>Group members</b></td><td>[Name, SAP ID]<br>[Name, SAP ID]<br>[Name, SAP ID]<br>[Name, SAP ID]</td></tr>
+  <tr><td><b>Submitted to</b></td><td>[Faculty name]</td></tr>
+  <tr><td><b>Date</b></td><td>14 November 2026</td></tr>
+</table>
+<br>
+<table class="info">
+  <tr><td><b>Both versions</b></td><td>https://kaus1ubh.github.io/btech-cafe-walla/</td></tr>
+  <tr><td><b>Version 1 (AI)</b></td><td>https://kaus1ubh.github.io/btech-cafe-walla/ai-version/</td></tr>
+  <tr><td><b>Version 2 (fixed)</b></td><td>https://kaus1ubh.github.io/btech-cafe-walla/fixed/</td></tr>
+  <tr><td><b>Source code</b></td><td>https://github.com/Kaus1ubh/btech-cafe-walla</td></tr>
+</table>
+</div>
+<br clear=all style='page-break-before:always'>
+<div>
+<h2>1. What we were asked to do</h2>
+<p>A new café near campus needs a website for its launch. It should have a home page, a menu, an about page and a way to order. We had to build it with AI, put it online, and then find what the AI got wrong. The brief says the mistakes are our responsibility, so finding and fixing them is the main part of this report.</p>
+<p>We called the café <b>BTech Cafe Walla</b>. It is fictional: a small café for UPES students, selling chai, coffee, Maggi and sandwiches.</p>
+
+<h2>2. The prompt we gave the AI</h2>
+<p>This is the first prompt, exactly as we typed it:</p>
+<p class="prompt">Firstly make the topic 1 in a website manner in which there are few AI bugs which AI makes most frequently and this website should be open on anydevice It should be available on Internet and make it simple and decent with programming in C &amp; by HTML . And also the name - cafe As "BTech cafe walla".</p>
+<p>The AI gave us four pages (home, menu, about, contact) and a stylesheet. At first glance it looked finished: a purple gradient bar, a big button and neat cards. We put it online as it was. That is <b>Version 1</b>.</p>
+<p>Then we tested it on a laptop and on a phone, read every line of text as if we were a customer, and tried to break the order form. We found eleven problems. Each one is below, with what went wrong, why it matters, how we fixed it, and the prompt that would have avoided it.</p>
+<p>The prompt itself had problems too. It says "programming in C", but websites are written in HTML, CSS and JavaScript, not C. We meant CSS. It also gives no real facts about the café, so the AI made them up. Mistake 2 shows what that led to.</p>
+</div>
+<br clear=all style='page-break-before:always'>
+<div>
+<h2>3. The mistakes</h2>
+
+<h3>Mistake 1: the copy could be about any café</h3>
+<p><span class="label">What went wrong.</span> "Where passion meets perfection in every cup." "We source only the finest ingredients." "Expert baristas." None of it mentions students, UPES, chai or Maggi. Swap the name and it could be a café in Mumbai or New York. The footer also says © 2023 and links to Facebook, Instagram and Twitter pages that don't exist (every link goes to "#").</p>
+<p><span class="label">Why it matters.</span> A launch website has to tell people why they should come here and not somewhere else. Generic text tells them nothing.</p>
+<p><span class="label">How we fixed it.</span> We rewrote every line for the real customer: "Chai before class. Maggi after." The home page now shows the hours, the location and the cheapest item (cutting chai, ₹15). We removed the dead social links and made the year update by itself.</p>
+<p><span class="label">Prompt that would have helped.</span></p>
+<p class="better">The customers are UPES students in Dehradun. Write the text for them: short, plain and specific. Mention chai, Maggi and studying between lectures. Don't use phrases like "passion meets perfection". Don't add social media links unless I give you the real ones.</p>
+
+<h3>Mistake 2: the AI made up facts</h3>
+<p><span class="label">What went wrong.</span> We never gave the AI an address, a phone number or a history. It invented all of them: "Shop No. 12, Rajpur Road", "+91 98765 43210", an email address, "founded in 2015", "over 50,000 happy customers", "a 4.9-star rating" and "award-winning baristas" who travel to Colombia and Ethiopia. A café that is only now launching can't have been founded in 2015.</p>
+<p class="caption">[Figure: the AI's About page, with the invented history.]</p>
+<img src="shots/c-v1-about.png" width="560">
+<p><span class="label">Why it matters.</span> Customers would walk to the wrong address and call a number that belongs to someone else. Fake ratings and awards are false advertising.</p>
+<p><span class="label">How we fixed it.</span> We deleted every fact we couldn't confirm. The site only states what the owner would actually tell us: the hours, the area and the menu. The footer says the café is fictional, because it is.</p>
+<p class="better">Use only the facts I give you. If you need a fact I haven't given (address, phone, founding year, reviews), write [ADD] in its place instead of inventing one.</p>
+
+<br clear=all style='page-break-before:always'>
+<h3>Mistake 3: the opening hours disagree with each other</h3>
+<p><span class="label">What went wrong.</span> The footer on every page says "Open daily: 8:00 AM to 10:00 PM". The contact page says "Monday to Saturday 9:00 AM to 9:00 PM, Sunday closed". A student who reads both can't tell whether the café is open on Sunday.</p>
+<p><span class="label">Why it matters.</span> Hours are the most common thing a customer checks. Two answers are worse than none.</p>
+<p><span class="label">How we fixed it.</span> The AI typed the hours by hand on every page, so they drifted apart. We moved every fact (hours, location, menu, prices, allergens) into one file, <b>cafe.js</b>. Every page reads from it. Changing the hours now means changing one line, and the pages can't disagree.</p>
+<p class="better">Keep the café's details (hours, address, prices) in one place in the code, and make every page use that one copy.</p>
+
+<h3>Mistake 4: prices in dollars</h3>
+<p><span class="label">What went wrong.</span> Every price is in US dollars: masala chai for $2.99, a paneer sandwich for $6.99. That's about ₹250 for a cup of chai.</p>
+<p><span class="label">Why it matters.</span> A café in Dehradun charges in rupees. Prices in dollars make the site look copied, and they make no sense to the customer.</p>
+<p><span class="label">How we fixed it.</span> All prices are now in rupees, at student prices: cutting chai ₹15, Maggi ₹40, cold coffee ₹70. They are stored as whole numbers, which also matters for Mistake 9.</p>
+<p class="better">The café is in Dehradun, India. Show all prices in Indian rupees (₹), at prices a college student would pay.</p>
+</div>
+<br clear=all style='page-break-before:always'>
+<div>
+<h3>Mistake 5: wrong allergen labels (a safety problem)</h3>
+<p><span class="label">What went wrong.</span> This was the most dangerous mistake we found. The AI added labels that are simply false:</p>
+<table class="sum">
+  <tr><th>Item</th><th>The AI's label</th><th>The truth</th></tr>
+  <tr><td>Classic cappuccino</td><td>Dairy free</td><td>A cappuccino is espresso with steamed milk</td></tr>
+  <tr><td>Paneer tikka sandwich</td><td>Vegan</td><td>Paneer is cheese, made from milk</td></tr>
+  <tr><td>Walnut brownie</td><td>Nut free</td><td>Walnuts are tree nuts. The name says so</td></tr>
+  <tr><td>Blueberry muffin</td><td>Gluten free</td><td>A normal muffin is made with wheat flour</td></tr>
+</table>
+<img src="shots/c-v1-menu.png" width="560">
+<p class="caption">[Figure: the AI's menu. Note the "Nut Free" label on the walnut brownie and the dollar prices.]</p>
+<p><span class="label">Why it matters.</span> Someone with a nut allergy who trusts the "nut free" label could end up in hospital. A website can't make that kind of mistake.</p>
+<p><span class="label">How we fixed it.</span> Every item now lists what it contains: "Contains gluten, milk, egg, tree nuts". Items get the green or red mark used on Indian food packaging. Above the menu, a note tells customers with allergies to ask at the counter. One small kitchen can't promise an item has no traces of anything.</p>
+<p class="better">For every menu item, list the allergens it contains (milk, gluten, egg, nuts, soy). Never label anything "free from" an allergen. If you're not sure, say so and I'll check.</p>
+
+<h3>Mistake 6: links that work on our laptop but break online</h3>
+<p><span class="label">What went wrong.</span> On our laptops every link worked. Online, clicking <b>Menu</b> or <b>About</b> gave "404: File not found". The AI saved the file as <b>menu.html</b> but linked to <b>Menu.html</b>, with a capital M. Windows treats those as the same name. The server that runs GitHub Pages doesn't.</p>
+<img src="shots/c-v1-404.png" width="560">
+<p class="caption">[Figure: clicking "Menu" on the live Version 1 site.]</p>
+<p><span class="label">Why it matters.</span> Half the site was unreachable for every visitor, and we wouldn't have known if we had only tested on a laptop.</p>
+<p><span class="label">How we fixed it.</span> All file names and links are now lowercase and match exactly. We clicked every link on the live site, not only the local copy.</p>
+<p class="better">Use lowercase file names, and make every link match its file name exactly, including capital letters.</p>
+</div>
+<br clear=all style='page-break-before:always'>
+<div>
+<h3>Mistake 7: the site doesn't fit on a phone</h3>
+<p><span class="label">What went wrong.</span> Our prompt said the site "should be open on any device". It opens, but on a phone it is shrunk to a tiny desktop page, and part of it hangs off the right edge. The menu links get cut off at "Men". Two things cause it. The page has no <b>viewport</b> tag, which tells a phone to use its real width. And the layout is fixed at 1200 pixels wide, while a phone is about 390.</p>
+<table class="sum"><tr>
+<td style="border:0"><img src="shots/c-v1-home-phone.png" width="200"><p class="caption">Version 1 on an iPhone 13</p></td>
+<td style="border:0"><img src="shots/c-v2-home-phone.png" width="200"><p class="caption">Version 2 on the same phone</p></td>
+</tr></table>
+<p><span class="label">Why it matters.</span> Almost every student will open the site on a phone, so for most visitors this was the only version they would see.</p>
+<p><span class="label">How we fixed it.</span> We added the viewport tag and replaced the fixed widths with a layout that adapts. Cards sit side by side on a laptop and stack on a phone, and the menu links wrap onto a second line instead of disappearing. We tested at phone size: nothing scrolls sideways any more.</p>
+<p class="better">Build it mobile-first. Add the viewport meta tag, use no fixed pixel widths for layout, and check that nothing scrolls sideways at 375 pixels wide.</p>
+
+<h3>Mistake 8: broken images and an invisible headline</h3>
+<p><span class="label">What went wrong.</span> The AI linked to photos on another website (Unsplash) using addresses that don't exist, so every image is a broken box. Worse, the main headline "Welcome to BTech Cafe Walla" is white text that only shows up on top of the photo. With no photo, it is white on white, so the first thing a visitor sees has no café name on it. The images also have no <b>alt</b> text, so a blind visitor's screen reader gets nothing.</p>
+<img src="shots/v1-home-desktop.png" width="480">
+<p class="caption">[Figure: Version 1's home page. The headline is there, but invisible.]</p>
+<p><span class="label">Why it matters.</span> The home page is the café's first impression, and it showed an empty space and three broken pictures.</p>
+<p><span class="label">How we fixed it.</span> Version 2 doesn't depend on outside images at all. The logo is drawn in the page itself, and all text is dark on a light background, so it always shows.</p>
+<p class="better">Don't link to images on other websites. Use images I provide, or none. Text must stay readable even if an image fails to load, and every image needs alt text.</p>
+</div>
+<br clear=all style='page-break-before:always'>
+<div>
+<h3>Mistake 9: the order total is wrong</h3>
+<p><span class="label">What went wrong.</span> We picked three cappuccinos at $4.99 each. The total should be $14.97 plus a $2 delivery charge, so $16.97. The site showed <b>$14.972</b>. The code stores the delivery charge as text ("2") instead of a number, so JavaScript sticks it on the end of the total instead of adding it. The form also accepts a quantity of −4 and shows a negative total.</p>
+<img src="shots/v1-order-desktop.png" width="480">
+<p class="caption">[Figure: three cappuccinos come to "$14.972".]</p>
+<p><span class="label">Why it matters.</span> A customer who sees a wrong price stops trusting everything else on the page, and a negative quantity should never be possible.</p>
+<p><span class="label">How we fixed it.</span> Prices are whole numbers of rupees, quantities are read as whole numbers between 0 and 10, and anything else is reset. The total is added up as numbers. We checked it by hand: 2 masala chai + 1 cheese Maggi + 1 cold coffee = 50 + 60 + 70 = ₹180, which is what the site shows.</p>
+<img src="shots/c-v2-cart.png" width="300">
+<p class="better">Store prices as whole numbers of rupees, not text. Quantities must be whole numbers from 1 to 10. Test the total with a few orders and show me the results.</p>
+
+<h3>Mistake 10: the order form says "order placed" when nothing was sent</h3>
+<p><span class="label">What went wrong.</span> Press "Place Order" with every box empty and the site says: "Thank you! Your order has been placed successfully. We will contact you shortly." Nothing was checked and nothing was sent anywhere. The site has no server, so the order goes nowhere. The phone box also accepts letters.</p>
+<p><span class="label">Why it matters.</span> A customer would walk to the café expecting their food to be ready, and the café would know nothing about it.</p>
+<p><span class="label">How we fixed it.</span> The form now checks everything before accepting it: at least one item, a name, a real 10-digit Indian mobile number, and a pickup time while the café is open. Each problem shows a clear message next to its box. When the order is valid, the customer gets a token number and is told plainly to show the screen at the counter and pay there. The site doesn't pretend to send the order to a kitchen.</p>
+<table class="sum"><tr>
+<td style="border:0;width:55%"><img src="shots/c-v2-errors.png" width="320"><p class="caption">Each mistake gets its own message</p></td>
+<td style="border:0"><img src="shots/c-v2-done.png" width="210"><p class="caption">A valid order on a phone</p></td>
+</tr></table>
+<p class="better">Validate every field before accepting the order and show an error next to each wrong field. This is a static site with no server, so don't claim an order was sent. Tell the customer what will actually happen.</p>
+</div>
+<br clear=all style='page-break-before:always'>
+<div>
+<h3>Mistake 11: hard to read, and impossible to use without a mouse</h3>
+<p><span class="label">What went wrong.</span> Most of the body text is light grey (#aaaaaa) on white. Its contrast ratio is 2.3 to 1, and the accessibility standard (WCAG AA) asks for at least 4.5 to 1. The green allergen tags are worse, at 1.6 to 1. The form boxes have no labels, only grey placeholder text that disappears once you start typing. The "Place Order" and "Explore Our Menu" buttons aren't real buttons, so you can't reach them with the Tab key.</p>
+<p><span class="label">Why it matters.</span> Pale text is hard to read in sunlight on a phone, and people who use a keyboard or a screen reader can't order at all.</p>
+<p><span class="label">How we fixed it.</span> Body text is dark brown on cream (15 to 1), the lighter secondary text is 6.1 to 1, and the orange button has white text (about 5.9 to 1). Every box has a visible label, the buttons are real buttons, and there is a clear outline that shows where you are when you press Tab.</p>
+<p class="better">Meet WCAG AA: text contrast of at least 4.5 to 1, a visible label on every form field, real button elements, and a visible focus outline.</p>
+</div>
+<br clear=all style='page-break-before:always'>
+<div>
+<h2>4. The second prompt, and the one we should have written first</h2>
+<p>After testing, we sent the AI our second prompt:</p>
+<p class="prompt">Now also give me a DOCS file which tell US AI made mistakes and how we can solve it by ourselves &amp; or which prompt should I have used to get desired or perfect output. And give me a corrected website.</p>
+<p>The AI could fix some mistakes when we pointed at them. It couldn't find the important ones by itself. The allergen labels, the made-up address and the 404 only came out because we read every line and tested the live site. Looking back, most of the mistakes started with our first prompt, which was short and gave no real facts. Here is the prompt we should have started with. It brings together the fixes listed above:</p>
+<p class="better">Build a simple, decent multi-page website for "BTech Cafe Walla", a small café near UPES, Dehradun, for college students. Use only HTML, CSS and a little plain JavaScript. It will be hosted on GitHub Pages, so there is no server.<br><br>
+Pages: home, menu, about, and an order-for-pickup form.<br><br>
+Facts (use only these; write [ADD] for anything missing): open every day 8 AM to 11 PM; location "near UPES campus, Bidholi, Dehradun"; menu and prices in rupees: [list items, prices and what each contains].<br><br>
+Rules:<br>
+1. Keep all café details in one file that every page reads from.<br>
+2. Mobile-first: viewport tag, no fixed widths, nothing scrolls sideways at 375 px.<br>
+3. For every menu item, list its allergens. Never write "free from".<br>
+4. Prices are whole numbers. Validate the form (items, name, 10-digit mobile, pickup time inside opening hours). Don't claim the order was sent.<br>
+5. WCAG AA contrast, labels on all fields, real buttons, visible focus.<br>
+6. Lowercase file names; every link matches its file exactly.<br>
+7. No images from other websites. Plain, specific text for students, with no marketing clichés.</p>
+
+<br clear=all style='page-break-before:always'>
+<h2>5. How we put it online</h2>
+<p>Both versions are online through GitHub Pages, which hosts static websites for free.</p>
+<p>1. We created a public repository called <b>btech-cafe-walla</b> on GitHub.<br>
+2. We uploaded the files: <b>ai-version/</b> holds Version 1, <b>fixed/</b> holds Version 2, and a small landing page at the top links to both.<br>
+3. In the repository's Settings, under Pages, we chose the <b>main</b> branch as the source.<br>
+4. About a minute later the site was live at kaus1ubh.github.io/btech-cafe-walla. It opens on any phone or laptop.</p>
+<p>Testing on the live site, not just our laptops, is how we caught Mistake 6.</p>
+
+<h2>6. What we learned</h2>
+<p>The AI's first version looked finished, and that was the problem. It looked right while its facts were wrong: invented history, the wrong currency and dangerous allergen labels. Only reading every line found those. The code bugs (the wrong total, the 404, the phone layout) only showed up when we tested the way a real customer would: on a phone, on the live site, and with bad input.</p>
+<p>The prompt mattered too. Most of the eleven mistakes trace back to what our first prompt left out. When we give the AI the real facts and the rules up front, it has much less to guess, and guessing is where it went wrong.</p>
+</div>
+<br clear=all style='page-break-before:always'>
+<div>
+<h2>Summary for the café owner</h2>
+<p class="big"><b>Your website is ready.</b> We checked the AI's first version and fixed eleven problems before launch. The ones that would have hurt you most:</p>
+<table class="sum">
+  <tr><th style="width:38%">Found</th><th>Fixed</th></tr>
+  <tr><td>"Nut free" on a walnut brownie, and three other false allergen labels</td><td>Every item lists what it contains, and customers with allergies are asked to check at the counter</td></tr>
+  <tr><td>Invented address, phone number and reviews</td><td>The site states only facts you've confirmed</td></tr>
+  <tr><td>Prices in dollars, and a total that read $14.972</td><td>Rupee prices and a correct total</td></tr>
+  <tr><td>Unusable on phones; Menu and About pages gave a 404 online</td><td>Works on any phone; every link tested on the live site</td></tr>
+  <tr><td>Said "order placed" when nothing was sent</td><td>A checked form and a token to show at the counter</td></tr>
+</table>
+<p class="big"><b>Before launch, please give us:</b> your exact address, a phone number, and the final menu with prices and ingredients. It's one file to update.</p>
+<p class="big"><b>Live site:</b> kaus1ubh.github.io/btech-cafe-walla/fixed/</p>
+</div>
+
+</body>
+</html>
